@@ -1,9 +1,12 @@
 From Coq Require Import Reals Psatz.
 From Coquelicot Require Import Coquelicot.
-From mathcomp.ssreflect Require Import ssreflect ssrfun ssrbool eqtype ssrnat seq fintype bigop.
+From mathcomp.ssreflect Require Import ssreflect ssrfun ssrbool eqtype seq fintype bigop.
 
 Require Import Stdlib.
 Require Import MathComp.
+
+(* This needs to be here to have the Delimit Scope N_scope with num active *)
+From mathcomp.ssreflect Require Import ssrnat.
 
 Lemma continuous_Rinv x :
   x <> 0 ->
@@ -631,7 +634,7 @@ apply: (filterlimi_lim_ext_loc (* (fun x => - (exp(- lam * x) - exp(-lam * a)) /
 
 rewrite /=.
 apply: (filterlim_ext (fun x => minus (exp (-(lam * a)) / lam) (exp (-(lam * x)) / lam))).
-move => x;rewrite /minus plus_comm; congr plus. rewrite /opp /=; field; lra.
+move => x; rewrite /minus Hierarchy.plus_comm; congr plus. rewrite /opp /=; field; lra.
 rewrite /opp /=; field; lra.
 rewrite /minus.
 apply: (filterlim_comp _ _ _ (fun x => opp (exp (-(lam * x)) / lam)) (fun x => plus (exp (- (lam * a)) / lam) x) (Rbar_locally p_infty) (locally (0)) (locally (exp (- (lam * a)) / lam))); last first.

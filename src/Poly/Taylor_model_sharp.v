@@ -23,7 +23,7 @@ liability. See the COPYING file for more details.
 From Coq Require Import ZArith Psatz Reals.
 From Flocq Require Import Raux.
 From Coquelicot Require Import Coquelicot.
-From mathcomp.ssreflect Require Import ssreflect ssrfun ssrbool eqtype ssrnat seq fintype bigop.
+From mathcomp.ssreflect Require Import ssreflect ssrfun ssrbool eqtype seq fintype bigop.
 
 Require Import Stdlib.
 Require Import MathComp.
@@ -37,6 +37,8 @@ Require Import Datatypes.
 Require Import Taylor_poly.
 Require Import Basic_rec.
 Require Import Bound.
+
+From mathcomp.ssreflect Require Import ssrnat.
 
 (********************************************************************)
 (** This theory implements Taylor models with interval polynomials for

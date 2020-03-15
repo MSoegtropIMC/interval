@@ -1,12 +1,14 @@
 From Coq Require Import Reals ZArith Psatz Fourier_util.
 From Coquelicot Require Import Coquelicot AutoDerive.
-From mathcomp.ssreflect Require Import ssreflect ssrfun ssrbool ssrnat bigop.
+From mathcomp.ssreflect Require Import ssreflect ssrfun ssrbool bigop.
 
 Require Import Stdlib.
 Require Import Coquelicot.
 Require Import Xreal.
 Require Import Sig.
 Require Import Interval.
+
+From mathcomp.ssreflect Require Import ssrnat.
 
 Section powerRZMissing.
 
@@ -186,7 +188,7 @@ pose fg' := (fun t => scal (f t) (g' t)).
 pose f'gplusfg' := (fun t : R => plus (f'g t) (fg' t)).
 apply (is_RInt_ext (fun x => minus (f'gplusfg' x) (fg' x))) => [x HX|].
 rewrite /f'gplusfg' /fg' /f /g /f'g.
-by rewrite /minus -plus_assoc plus_opp_r plus_zero_r /scal.
+by rewrite /minus -Hierarchy.plus_assoc plus_opp_r plus_zero_r /scal.
 apply: is_RInt_minus.
 - apply: (is_RInt_ext (fun t : R => plus (scal (f' t) (g t)) (scal (f t) (g' t)))) =>[x Hx|].
     by [].

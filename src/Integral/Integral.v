@@ -242,7 +242,7 @@ split.
         exact: Rlt_le.
       apply: Rplus_le_compat_r.
       move: (Hu _ Hfau). rewrite /ball_norm /minus.
-      rewrite -{2}[If]opp_opp -opp_plus norm_opp plus_comm.
+      rewrite -{2}[If]opp_opp -opp_plus norm_opp Hierarchy.plus_comm.
       exact: Rlt_le.
       rewrite /pos_div_2 /=; lra.
       rewrite -opp_minus -[minus (RInt f a v) If]opp_minus. rewrite -opp_plus.
@@ -274,7 +274,7 @@ split.
   unfold minus.
   apply is_RInt_swap in HI1.
   have HC := (is_RInt_Chasles _ _ _ _ _ _ HI1 HI2).
-  rewrite plus_comm.
+  rewrite Hierarchy.plus_comm.
   move: (H _ _ Qbu2 Qbv2) => /= .
   move => /(_ _ HC) Hle.
   apply: Rle_lt_trans Hle _.

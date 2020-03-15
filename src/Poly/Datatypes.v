@@ -22,7 +22,7 @@ liability. See the COPYING file for more details.
 
 From Coq Require Import ZArith Reals.
 From Coquelicot Require Import Coquelicot.
-From mathcomp.ssreflect Require Import ssreflect ssrfun ssrbool eqtype ssrnat seq fintype bigop.
+From mathcomp.ssreflect Require Import ssreflect ssrfun ssrbool eqtype seq fintype bigop.
 From Flocq Require Import Core.
 
 Require Import Stdlib.
@@ -30,6 +30,8 @@ Require Import MathComp.
 Require Import Interval.
 Require Import Xreal.
 Require Import Basic_rec.
+
+From mathcomp.ssreflect Require Import ssrnat.
 
 Set Implicit Arguments.
 Unset Strict Implicit.
@@ -256,7 +258,9 @@ Definition opp := map C.opp.
 Section PrecIsPropagated.
 Variable u : U.
 
-Definition add := map2 (C.add u) id.
+Locate id.
+
+Definition add := map2 (C.add u) ssrfun.id.
 
 Definition sub := map2 (C.sub u) C.opp.
 
@@ -574,6 +578,8 @@ Proof.
 move=> Hn; rewrite hornerE (big_nat_leq_idx _ Hn) //.
 by move=> i /andP [Hi _]; rewrite nth_default // Rmult_0_l.
 Qed.
+
+Print Scopes.
 
 Lemma coef_deriv p i :
   nth (deriv tt p) i = (nth p i.+1 * INR i.+1)%R.
